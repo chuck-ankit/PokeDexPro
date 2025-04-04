@@ -1,0 +1,56 @@
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+@import "tailwindcss";
+
+@layer components {
+  .pokemon-polygon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .stat-bar {
+    @apply h-2 rounded-full bg-gray-200 overflow-hidden;
+  }
+
+  .stat-fill {
+    @apply h-full bg-green-500 transition-all duration-300;
+  }
+
+  .type-badge {
+    @apply px-3 py-1 rounded-full text-white text-sm font-medium capitalize;
+  }
+}
+
+@theme {
+
+  --pokemon-normal: #A8A878;
+  --pokemon-fire: #F08030;
+  --pokemon-water: #6890F0;
+  --pokemon-electric: #F8D030;
+  --pokemon-grass: #78C850;
+  --pokemon-ice: #98D8D8;
+  --pokemon-fighting: #C03028;
+  --pokemon-poison: #A040A0;
+  --pokemon-ground: #E0C068;
+  --pokemon-flying: #A890F0;
+  --pokemon-psychic: #F85888;
+  --pokemon-bug: #A8B820;
+  --pokemon-rock: #B8A038;
+  --pokemon-ghost: #705898;
+  --pokemon-dragon: #7038F8;
+  --pokemon-dark: #705848;
+  --pokemon-steel: #B8B8D0;
+  --pokemon-fairy: #EE99AC;
+  --color-mantis-50: #f5fbf2;
+  --color-mantis-100: #e9f6e2;
+  --color-mantis-200: #d4ecc6;
+  --color-mantis-300: #b2db9a;
+  --color-mantis-400: #7bbc57;
+  --color-mantis-500: #65a641;
+  --color-mantis-600: #508831;
+  --color-mantis-700: #406c29;
+  --color-mantis-800: #355625;
+  --color-mantis-900: #2d4720;
+  --color-mantis-950: #15260d;
+
+
+}
