@@ -34,7 +34,7 @@ const PokemonCard = ({ pokemonData, isFeatured }) => {
   };
 
   return (
-    <div className={`group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden ${isFeatured ? 'border-2 border-yellow-400' : ''}`}>
+    <div className={`group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden ${isFeatured ? 'border-2 border-yellow-400' : ''} cursor-pointer`}>
       {isFeatured && (
         <div className="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4">
           <div className="bg-yellow-400 text-black px-3 py-0.5 rounded-full text-xs font-bold shadow-lg rotate-12">

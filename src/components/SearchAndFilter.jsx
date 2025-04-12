@@ -34,7 +34,7 @@ const SearchAndFilter = ({
               value={searchTerm}
               onChange={(e) => onSearchChange(e.target.value)}
               placeholder="Search Pokemon..."
-              className="w-full px-4 py-3 rounded-xl border-2 border-mantis-200 focus:border-mantis-500 focus:ring-2 focus:ring-mantis-200 transition-all duration-300 outline-none hover:border-mantis-300"
+              className="w-full px-4 py-3 rounded-xl border-2 border-mantis-200 focus:border-mantis-500 focus:ring-2 focus:ring-mantis-200 transition-all duration-300 outline-none hover:border-mantis-300 cursor-pointer"
             />
             <svg
               className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-mantis-400 group-hover:text-mantis-500 transition-colors duration-300"

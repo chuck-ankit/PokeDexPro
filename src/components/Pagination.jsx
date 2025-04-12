@@ -26,7 +26,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
           currentPage === 1
             ? 'bg-mantis-100 text-mantis-400 cursor-not-allowed'
-            : 'bg-mantis-500 text-white hover:bg-mantis-600 transform hover:scale-105'
+            : 'bg-mantis-500 text-white hover:bg-mantis-600 transform hover:scale-105 cursor-pointer'
         }`}
       >
         <svg
@@ -51,8 +51,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           onClick={() => onPageChange(page)}
           className={`w-10 h-10 rounded-xl font-medium transition-all duration-300 ${
             page === currentPage
-              ? 'bg-mantis-500 text-white transform scale-110 shadow-lg'
-              : 'bg-mantis-100 text-mantis-700 hover:bg-mantis-200'
+              ? 'bg-mantis-500 text-white transform scale-110 shadow-lg cursor-pointer'
+              : 'bg-mantis-100 text-mantis-700 hover:bg-mantis-200 cursor-pointer'
           }`}
         >
           {page}
@@ -65,7 +65,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
           currentPage === totalPages
             ? 'bg-mantis-100 text-mantis-400 cursor-not-allowed'
-            : 'bg-mantis-500 text-white hover:bg-mantis-600 transform hover:scale-105'
+            : 'bg-mantis-500 text-white hover:bg-mantis-600 transform hover:scale-105 cursor-pointer'
         }`}
       >
         Next
