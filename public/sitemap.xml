@@ -24,4 +24,12 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Add individual Pokemon pages -->
+  <url>
+    <loc>https://pokedexproplus.netlify.app/pokemon/1</loc>
+    <lastmod>2024-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Add more Pokemon pages as needed -->
 </urlset> 
