@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://pokedexproplus.netlify.app/sitemap.xml
+
+# Disallow admin and private pages
+Disallow: /admin/
+Disallow: /private/ 

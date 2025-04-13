@@ -149,6 +149,17 @@
   .pokemon-grid {
     gap: 1rem;
   }
+
+  .error-actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .retry-button,
+  .refresh-button {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {

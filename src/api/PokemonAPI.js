@@ -1,44 +1,72 @@
-const MAX_RETRIES = 3;
-const RETRY_DELAY = 1000; // 1 second
+const API_BASE_URL = 'https://pokeapi.co/api/v2';
 
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+// Cache for storing API responses
+const cache = new Map();
 
-const fetchWithRetry = async (url, retries = MAX_RETRIES) => {
+const fetchWithCache = async (url) => {
+  if (cache.has(url)) {
+    return cache.get(url);
+  }
+
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    const data = await response.json();
+    cache.set(url, data);
+    return data;
   } catch (error) {
-    if (retries > 0) {
-      await delay(RETRY_DELAY);
-      return fetchWithRetry(url, retries - 1);
-    }
+    console.error('Error fetching data:', error);
     throw error;
   }
 };
 
 export const fetchPokemonData = async () => {
   try {
-    const API = "https://pokeapi.co/api/v2/pokemon?limit=1302";
-    const data = await fetchWithRetry(API);
+    const response = await fetch(`${API_BASE_URL}/pokemon?limit=898`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    
+    // Fetch detailed data for each Pokemon in parallel with a concurrency limit
+    const pokemonDetails = await Promise.all(
+      data.results.map(async (pokemon) => {
+        try {
+          return await fetchWithCache(pokemon.url);
+        } catch (error) {
+          console.error(`Error fetching details for ${pokemon.name}:`, error);
+          return null;
+        }
+      })
+    );
 
-    const detailedPokemonData = data.results.map(async (curPokemon) => {
-      try {
-        const pokemonData = await fetchWithRetry(curPokemon.url);
-        return pokemonData;
-      } catch (error) {
-        console.error(`Error fetching details for ${curPokemon.name}:`, error);
-        return null;
-      }
-    });
-
-    const detailedResponses = await Promise.all(detailedPokemonData);
-    // Filter out any null responses from failed fetches
-    return detailedResponses.filter(pokemon => pokemon !== null);
+    // Filter out any failed requests and sort by ID
+    return pokemonDetails
+      .filter(pokemon => pokemon !== null)
+      .sort((a, b) => a.id - b.id);
   } catch (error) {
     console.error('Error fetching Pokemon data:', error);
-    throw new Error('Unable to fetch Pokemon data. Please check your internet connection and try again.');
+    throw error;
+  }
+};
+
+export const fetchPokemonById = async (id) => {
+  try {
+    return await fetchWithCache(`${API_BASE_URL}/pokemon/${id}`);
+  } catch (error) {
+    console.error(`Error fetching Pokemon with ID ${id}:`, error);
+    throw error;
+  }
+};
+
+export const fetchPokemonByType = async (type) => {
+  try {
+    const response = await fetchWithCache(`${API_BASE_URL}/type/${type}`);
+    return response.pokemon.map(p => p.pokemon);
+  } catch (error) {
+    console.error(`Error fetching Pokemon of type ${type}:`, error);
+    throw error;
   }
 };
